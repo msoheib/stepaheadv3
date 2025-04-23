@@ -4,12 +4,13 @@ import { Button } from '@/components/ui/button'
 import React from 'react'
 import { cn } from '@/lib/utils'
 import { Link } from '@tanstack/react-router'
+import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@clerk/clerk-react"
 
 const menuItems = [
-    { name: 'Features', to: '/features' },
-    { name: 'Solution', to: '/solution' },
-    { name: 'Pricing', to: '/pricing' },
-    { name: 'About', to: '/about' },
+    { name: 'Features', href: '#features' },
+    { name: 'Solution', href: '#solution' },
+    { name: 'Pricing', href: '#pricing' },
+    { name: 'About', href: '#about' },
 ]
 
 const Header = () => {
@@ -51,11 +52,11 @@ const Header = () => {
                             <ul className="flex gap-8 text-sm">
                                 {menuItems.map((item, index) => (
                                     <li key={index}>
-                                        <Link
-                                            to={item.to}
+                                        <a
+                                            href={item.href}
                                             className="text-muted-foreground hover:text-accent-foreground block duration-150">
                                             <span>{item.name}</span>
-                                        </Link>
+                                        </a>
                                     </li>
                                 ))}
                             </ul>
@@ -66,41 +67,36 @@ const Header = () => {
                                 <ul className="space-y-6 text-base">
                                     {menuItems.map((item, index) => (
                                         <li key={index}>
-                                            <Link
-                                                to={item.to}
+                                            <a
+                                                href={item.href}
                                                 className="text-muted-foreground hover:text-accent-foreground block duration-150">
                                                 <span>{item.name}</span>
-                                            </Link>
+                                            </a>
                                         </li>
                                     ))}
                                 </ul>
                             </div>
                             <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-                                <Button
-                                    asChild
-                                    variant="outline"
-                                    size="sm"
-                                    className={cn(isScrolled && 'lg:hidden')}>
-                                    <Link to="#">
-                                        <span>Login</span>
-                                    </Link>
-                                </Button>
-                                <Button
-                                    asChild
-                                    size="sm"
-                                    className={cn(isScrolled && 'lg:hidden')}>
-                                    <Link to="#">
-                                        <span>Sign Up</span>
-                                    </Link>
-                                </Button>
-                                <Button
-                                    asChild
-                                    size="sm"
-                                    className={cn(isScrolled ? 'lg:inline-flex' : 'hidden')}>
-                                    <Link to="#">
-                                        <span>Get Started</span>
-                                    </Link>
-                                </Button>
+                                <SignedOut>
+                                    <SignInButton mode="modal">
+                                        <Button
+                                            variant="outline"
+                                            size="sm"
+                                            className={cn(isScrolled && 'lg:hidden')}>
+                                            Login
+                                        </Button>
+                                    </SignInButton>
+                                    <SignUpButton mode="modal">
+                                        <Button
+                                            size="sm"
+                                            className={cn(isScrolled && 'lg:hidden')}>
+                                            Sign Up
+                                        </Button>
+                                    </SignUpButton>
+                                </SignedOut>
+                                <SignedIn>
+                                    <UserButton afterSignOutUrl="/" />
+                                </SignedIn>
                             </div>
                         </div>
                     </div>

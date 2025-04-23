@@ -2,12 +2,13 @@ import React from 'react'
 import { RootRoute, Route } from '@tanstack/react-router'
 import Layout from './components/Layout'
 import Home from './pages/Home'
-import PricingPage from './pages/Pricing'
+// Remove unused page/component imports
+// import PricingPage from './pages/Pricing' 
+// import Features1 from '@/components/features-1'
 
-// Placeholder components
-const FeaturesPage = () => <div className="text-center py-20 text-3xl">Features Page Coming Soon</div>
-const SolutionPage = () => <div className="text-center py-20 text-3xl">Solution Page Coming Soon</div>
-const AboutPage = () => <div className="text-center py-20 text-3xl">About Page Coming Soon</div>
+// Remove unused placeholder components
+// const SolutionPage = () => <div className="text-center py-20 text-3xl">Solution Page Coming Soon</div>
+// const AboutPage = () => <div className="text-center py-20 text-3xl">About Page Coming Soon</div>
 
 const rootRoute = new RootRoute({
   component: Layout,
@@ -16,9 +17,11 @@ const rootRoute = new RootRoute({
 const homeRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/',
-  component: Home,
+  component: Home, // This now renders the page with all sections
 })
 
+// Remove unused route definitions
+/*
 const pricingRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/pricing',
@@ -28,7 +31,7 @@ const pricingRoute = new Route({
 const featuresRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/features',
-  component: FeaturesPage,
+  component: Features1,
 })
 
 const solutionRoute = new Route({
@@ -42,11 +45,13 @@ const aboutRoute = new Route({
   path: '/about',
   component: AboutPage,
 })
+*/
 
+// Update routeTree to only include homeRoute
 export const routeTree = rootRoute.addChildren([
   homeRoute,
-  pricingRoute,
-  featuresRoute,
-  solutionRoute,
-  aboutRoute,
+  // pricingRoute, 
+  // featuresRoute,
+  // solutionRoute,
+  // aboutRoute,
 ]) 

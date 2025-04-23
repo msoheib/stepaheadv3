@@ -5,8 +5,9 @@ import { Check } from 'lucide-react'
 
 export default function Pricing() {
     return (
-        <section className="py-16 md:py-32">
-            <div className="mx-auto max-w-6xl px-6">
+        // Restore original structure: max-width and mx-auto on inner div is standard
+        <section id="pricing" className="py-16 md:py-32"> 
+            <div className="mx-auto max-w-6xl px-6"> 
                 <div className="mx-auto max-w-2xl space-y-6 text-center">
                     <h1 className="text-center text-4xl font-semibold lg:text-5xl">Pricing that Scales with You</h1>
                     <p>Gemini is evolving to be more than just the models. It supports an entire to the APIs and platforms helping developers and businesses innovate.</p>

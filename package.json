@@ -10,8 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@clerk/clerk-react": "^5.29.0",
+    "@clerk/tanstack-react-start": "^0.13.8",
     "@radix-ui/react-slot": "^1.2.0",
     "@tailwindcss/vite": "^4.1.4",
+    "@tanstack/react-router": "^1.117.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.503.0",
