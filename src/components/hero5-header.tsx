@@ -1,18 +1,18 @@
-import Link from 'next/link'
 import { Logo } from './logo'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import React from 'react'
 import { cn } from '@/lib/utils'
+import { Link } from '@tanstack/react-router'
 
 const menuItems = [
-    { name: 'Features', href: '#link' },
-    { name: 'Solution', href: '#link' },
-    { name: 'Pricing', href: '#link' },
-    { name: 'About', href: '#link' },
+    { name: 'Features', to: '/features' },
+    { name: 'Solution', to: '/solution' },
+    { name: 'Pricing', to: '/pricing' },
+    { name: 'About', to: '/about' },
 ]
 
-export const HeroHeader = () => {
+const Header = () => {
     const [menuState, setMenuState] = React.useState(false)
     const [isScrolled, setIsScrolled] = React.useState(false)
 
@@ -32,7 +32,7 @@ export const HeroHeader = () => {
                     <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
                         <div className="flex w-full justify-between lg:w-auto">
                             <Link
-                                href="/"
+                                to="/"
                                 aria-label="home"
                                 className="flex items-center space-x-2">
                                 <Logo />
@@ -52,7 +52,7 @@ export const HeroHeader = () => {
                                 {menuItems.map((item, index) => (
                                     <li key={index}>
                                         <Link
-                                            href={item.href}
+                                            to={item.to}
                                             className="text-muted-foreground hover:text-accent-foreground block duration-150">
                                             <span>{item.name}</span>
                                         </Link>
@@ -67,7 +67,7 @@ export const HeroHeader = () => {
                                     {menuItems.map((item, index) => (
                                         <li key={index}>
                                             <Link
-                                                href={item.href}
+                                                to={item.to}
                                                 className="text-muted-foreground hover:text-accent-foreground block duration-150">
                                                 <span>{item.name}</span>
                                             </Link>
@@ -81,7 +81,7 @@ export const HeroHeader = () => {
                                     variant="outline"
                                     size="sm"
                                     className={cn(isScrolled && 'lg:hidden')}>
-                                    <Link href="#">
+                                    <Link to="#">
                                         <span>Login</span>
                                     </Link>
                                 </Button>
@@ -89,7 +89,7 @@ export const HeroHeader = () => {
                                     asChild
                                     size="sm"
                                     className={cn(isScrolled && 'lg:hidden')}>
-                                    <Link href="#">
+                                    <Link to="#">
                                         <span>Sign Up</span>
                                     </Link>
                                 </Button>
@@ -97,7 +97,7 @@ export const HeroHeader = () => {
                                     asChild
                                     size="sm"
                                     className={cn(isScrolled ? 'lg:inline-flex' : 'hidden')}>
-                                    <Link href="#">
+                                    <Link to="#">
                                         <span>Get Started</span>
                                     </Link>
                                 </Button>
@@ -109,3 +109,5 @@ export const HeroHeader = () => {
         </header>
     )
 }
+
+export default Header
