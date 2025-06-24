@@ -21,13 +21,20 @@ export default function Layout() {
       <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid #ccc', paddingBottom: '10px' }}>
         <div>
           <Link to="/" style={{ marginRight: '10px', fontWeight: 'bold' }}>CramFighter Clone</Link>
-          {user && <Link to="/" style={{ marginRight: '10px' }}>Dashboard</Link>}
+          {user && (
+            <>
+              <Link to="/" style={{ marginRight: '10px' }}>Dashboard</Link>
+              <Link to="/subjects" style={{ marginRight: '10px' }}>Subjects</Link>
+              <Link to="/resources" style={{ marginRight: '10px' }}>Resources</Link>
+              <Link to="/preferences" style={{ marginRight: '10px' }}>Preferences</Link>
+            </>
+          )}
         </div>
         <div>
           {user ? (
             <>
-              <span style={{ marginRight: '10px' }}>Welcome, {user.email}</span>
-              <button onClick={handleLogout}>Logout</button>
+              <span style={{ marginRight: '10px' }}>User: {user.email}</span> {/* Changed Welcome to User for brevity */}
+              <button onClick={handleLogout} style={{cursor: 'pointer'}}>Logout</button>
             </>
           ) : (
             <>

@@ -5,6 +5,9 @@ import Layout from '../components/Layout';
 import DashboardPage from '../pages/DashboardPage';
 import LoginPage from '../pages/LoginPage';
 import SignupPage from '../pages/SignupPage';
+import SubjectsPage from '../pages/SubjectsPage'; // Import new page
+import ResourcesPage from '../pages/ResourcesPage'; // Import new page
+import PreferencesPage from '../pages/PreferencesPage'; // Import new page
 
 // Create a root route
 const rootRoute = new RootRoute({
@@ -47,8 +50,48 @@ const signupRoute = new Route({
   component: SignupPage,
 });
 
+// Generic beforeLoad function for protected routes
+const protectedRouteBeforeLoad = async ({ location }) => {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) {
+    throw redirect({
+      to: '/login',
+      search: { redirect: location.href },
+    });
+  }
+  return {}; // Or router context if needed
+};
+
+const subjectsRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: '/subjects',
+  component: SubjectsPage,
+  beforeLoad: protectedRouteBeforeLoad,
+});
+
+const resourcesRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: '/resources',
+  component: ResourcesPage,
+  beforeLoad: protectedRouteBeforeLoad,
+});
+
+const preferencesRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: '/preferences',
+  component: PreferencesPage,
+  beforeLoad: protectedRouteBeforeLoad,
+});
+
 // Create the route tree
-const routeTree = rootRoute.addChildren([indexRoute, loginRoute, signupRoute]);
+const routeTree = rootRoute.addChildren([
+  indexRoute,
+  loginRoute,
+  signupRoute,
+  subjectsRoute,
+  resourcesRoute,
+  preferencesRoute
+]);
 
 // Create the router instance
 export const router = new Router({ routeTree });
